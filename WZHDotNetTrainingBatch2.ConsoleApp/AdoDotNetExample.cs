@@ -67,6 +67,34 @@ namespace WZHDotNetTrainingBatch2.ConsoleApp
             }
         }
 
+        public void Edit()
+        {
+            Console.Write("Enter id:");
+            string blogId = Console.ReadLine()!;
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+           // string query = $"select * from Tbl_Blog where BlogId = {blogId} ";//or 1=1"; can cause sql injection avoid this way
+            string query = $"select * from Tbl_Blog where BlogId = @BlogId"; //variable @
+            SqlCommand cmd = new SqlCommand(query,connection);
+           //cmd.Parameters.AddWithValue("@BlogId", blogId);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            connection.Close();
+
+            for (int i = 0; i < dt.Rows.Count; i++)// double tap
+            {
+                DataRow row = dt.Rows[i];
+                Console.WriteLine(i);
+                Console.WriteLine("blogid =>" + row["BlogId"]);// we don't use index can cause place error
+                Console.WriteLine("blogtitle =>" + row["BlogTitle"]);
+                Console.WriteLine("blogauthor =>" + row["BlogAuthor"]);
+                Console.WriteLine("blogcontent =>" + row["BlogContent"]);
+            }   
+
+
+        }
 
         public void Create()
         {
@@ -79,19 +107,32 @@ namespace WZHDotNetTrainingBatch2.ConsoleApp
             Console.Write("Enter Content:");
             string content = Console.ReadLine()!;
 
+            //       string query = $@"INSERT INTO [dbo].[Tbl_Blog]
+            //      ([BlogTitle]
+            //      ,[BlogAuthor]
+            //      ,[BlogContent])
+            //VALUES
+            //      ('{title}'
+            //      ,'{author}'
+            //      ,'{content}')"; can cause sql conjection 
+
             string query = $@"INSERT INTO [dbo].[Tbl_Blog]
            ([BlogTitle]
            ,[BlogAuthor]
            ,[BlogContent])
      VALUES
-           ('{title}'
-           ,'{author}'
-           ,'{content}')";
+           (@Title
+           ,@Author
+           ,@Content)";// this is secure ways
 
 
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             connection.Open();
             SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@Title",title);
+            cmd.Parameters.AddWithValue("@Author", author);
+            cmd.Parameters.AddWithValue("@Content", content);// the best way to write with parameters
+
             int result = cmd.ExecuteNonQuery();
             connection.Close();
             Console.WriteLine(result > 0 ? "insert successed" : "insert failed");

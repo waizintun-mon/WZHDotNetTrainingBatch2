@@ -8,8 +8,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 Console.WriteLine("Hello, World!");
 
 AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
-adoDotNetExample.Read();
+//adoDotNetExample.Read();
 //adoDotNetExample.Create();
+adoDotNetExample.Edit();
 
 Console.ReadKey();
 
