@@ -10,7 +10,15 @@ Console.WriteLine("Hello, World!");
 AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
 //adoDotNetExample.Read();
 //adoDotNetExample.Create();
-adoDotNetExample.Edit();
+//adoDotNetExample.Edit();
+
+DapperExample dapperExample = new DapperExample();
+//dapperExample.Read();
+//dapperExample.Edit();
+//dapperExample.Create();
+//dapperExample.Update();
+dapperExample.Delete();
+
 
 Console.ReadKey();
 
