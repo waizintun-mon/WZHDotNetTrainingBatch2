@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WZHDotNetTrainingBatch2.Database\WZHDotNetTrainingBatch2.Database.csproj" />
+  </ItemGroup>
+
 </Project>
