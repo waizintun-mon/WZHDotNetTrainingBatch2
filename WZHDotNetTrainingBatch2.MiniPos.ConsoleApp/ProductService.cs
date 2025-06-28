@@ -1,17 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.Identity.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WZHDotNetTrainingBatch2.DataBase.App2DbContextModels;
-using WZHMiniPos.App2DbContextModels;
+using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
 
-namespace WZHDotNetTrainingBatch2.MiniPos
+namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
 {
-    public class ProductServie
+    public class ProductService
     {
         public void Read()
         {
@@ -108,7 +104,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             Console.WriteLine("4. Delete Product");
             Console.WriteLine("5. Exit");
             Console.WriteLine("---------------------------");
-           
+
         Menu:
             Console.Write("Choose menu..");
             string input = Console.ReadLine()!;
@@ -121,9 +117,9 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             EnumProductMenu menu = (EnumProductMenu)no;
             switch (menu)
             {
-             
+
                 case EnumProductMenu.NewProduct:
-                    Console.WriteLine( "This Menu is NewProduct");
+                    Console.WriteLine("This Menu is NewProduct");
                     Create();
                     break;
                 case EnumProductMenu.ProductList:
@@ -140,25 +136,25 @@ namespace WZHDotNetTrainingBatch2.MiniPos
                     break;
                 case EnumProductMenu.Exit:
                     goto End;
-                    
-            case EnumProductMenu.None:
-            default:
+
+                case EnumProductMenu.None:
+                default:
                     Console.WriteLine("Invalid Product Menu,please choose from 1 to 4");
                     goto Menu;
             }
-            Console.WriteLine( "------------------------------");
+            Console.WriteLine("------------------------------");
             goto Menu;
 
         End:
-            Console.WriteLine( "Exiting from app");
+            Console.WriteLine("Exiting from app");
         }
 
-        
+
     }
     public enum EnumProductMenu
     {
         None,
-        NewProduct ,
+        NewProduct,
         ProductList,
         EditProduct,
         DeleteProduct,
@@ -172,5 +168,5 @@ namespace WZHDotNetTrainingBatch2.MiniPos
         SaleDetail,
         Exit
     }
-    
 }
+

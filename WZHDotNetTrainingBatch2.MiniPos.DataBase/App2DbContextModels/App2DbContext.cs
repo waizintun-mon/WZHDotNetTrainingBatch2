@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace WZHMiniPos.App2DbContextModels;
+namespace WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
 
 public partial class App2DbContext : DbContext
 {
@@ -41,9 +41,9 @@ public partial class App2DbContext : DbContext
 
         modelBuilder.Entity<TblSaleDetail>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Tbl_SaleDetail");
+            entity.HasKey(e => e.SaleDetailId);
+
+            entity.ToTable("Tbl_SaleDetail");
 
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
         });

@@ -1,7 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-using WZHDotNetTrainingBatch2.MiniPos;
+﻿
+using WZHDotNetTrainingBatch2.MiniPos.DataBase;
 
-Console.WriteLine("Welcome to MiniPos!");
+using WZHDotNetTrainingBatch2.MiniPos.ConsoleApp;
+
+Console.WriteLine("Welcome to Mini Pos");
+
 Menu:
 
 Console.WriteLine(" Menu");
@@ -21,10 +24,10 @@ if (!isInt)
     goto Menu;
 }
 EnumMenu menu = (EnumMenu)no;
-switch (menu )
+switch (menu)
 {
     case EnumMenu.Product:
-        ProductServie productServie = new ProductServie();
+        ProductService productServie = new ProductService();
         productServie.Execute();
         goto Menu;
     case EnumMenu.Sale:
@@ -32,9 +35,9 @@ switch (menu )
         saleService.Execute();
         goto Menu;
     case EnumMenu.SaleDetail:
-        SaleDetailService   saleDetailService = new SaleDetailService();
+        SaleDetailService saleDetailService = new SaleDetailService();
         saleDetailService.Execute();
-        break;
+        goto Menu;
     case EnumMenu.Exit:
         goto End;
     case EnumMenu.None:
@@ -43,14 +46,3 @@ switch (menu )
 }
 End:
 Console.WriteLine("Exiting from app");
-//ProductServie efCoreMiniPos = new ProductServie();
-//efCoreMiniPos.Read();
-//efCoreMiniPos.Edit();
-//efCoreMiniPos.Create();
-//efCoreMiniPos.Update();
-//efCoreMiniPos.Delete();
-//SaleService miniPosSale = new SaleService();
-//miniPosSale.Read();
-//miniPosSale.Create();
-
-//Console.ReadKey();

@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WZHDotNetTrainingBatch2.DataBase.App2DbContextModels;
-using WZHMiniPos.App2DbContextModels;
+using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
 
-namespace WZHDotNetTrainingBatch2.MiniPos
+namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
 {
     public class SaleService
     {
         public void Read()
         {
             App2DbContext db = new App2DbContext();
-           var lst = db.TblSaleSummaries.ToList();
+            var lst = db.TblSaleSummaries.ToList();
             foreach (var item in lst)
             {
                 Console.WriteLine(item.SaleId);
                 Console.WriteLine(item.SaleDate);
                 Console.WriteLine(item.VoucherNo);
-                Console.WriteLine( item.Total);
+                Console.WriteLine(item.Total);
             }
         }
         public void Edit()
@@ -29,7 +28,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             bool isInt = int.TryParse(input, out int id);
 
             App2DbContext db = new App2DbContext();
-           var item = db.TblSaleSummaries.FirstOrDefault(x=> x.SaleId == id);
+            var item = db.TblSaleSummaries.FirstOrDefault(x => x.SaleId == id);
             if (item is null) return;
             Console.WriteLine(item.SaleDate);
             Console.WriteLine(item.VoucherNo);
@@ -46,7 +45,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             Console.Write("Total amount");
             decimal total = decimal.Parse(Console.ReadLine()!);
 
-            TblSaleSummary sale= new TblSaleSummary();
+            TblSaleSummary sale = new TblSaleSummary();
             sale.SaleDate = DateTime.Parse(date);
 
             sale.VoucherNo = voucher;
@@ -54,7 +53,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
 
             App2DbContext db = new App2DbContext();
             db.TblSaleSummaries.Add(sale);
-           var result = db.SaveChanges();
+            var result = db.SaveChanges();
             Console.WriteLine(result > 0 ? "insert successful" : "insert failed");
 
 
@@ -62,8 +61,8 @@ namespace WZHDotNetTrainingBatch2.MiniPos
         public void Execute()
         {
             Console.WriteLine("Sale Menu");
-            Console.WriteLine( "-------------------");
-            Console.WriteLine( "1. SaleRecord ");
+            Console.WriteLine("-------------------");
+            Console.WriteLine("1. SaleRecord ");
             Console.WriteLine("2. Edit Sale");
             Console.WriteLine("3. New Sale");
             Console.WriteLine("4. Exit");
@@ -81,7 +80,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             EnumSale menu = (EnumSale)no;
             switch (menu)
             {
-            
+
                 case EnumSale.SaleRecord:
                     Console.WriteLine("This is Sale Record");
                     Read();
@@ -95,10 +94,10 @@ namespace WZHDotNetTrainingBatch2.MiniPos
                     Create();
                     break;
                 case EnumSale.Exit:
-                    
+
                     goto End;
-            case EnumSale.None:
-            default:
+                case EnumSale.None:
+                default:
                     break;
             }
         End: Console.WriteLine("Exiting from Sale menu");
@@ -109,7 +108,8 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             SaleRecord,
             EditSale,
             NewSale,
-            Exit 
+            Exit
         }
     }
 }
+

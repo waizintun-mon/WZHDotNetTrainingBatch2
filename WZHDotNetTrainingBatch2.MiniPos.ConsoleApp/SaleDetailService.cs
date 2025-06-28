@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WZHDotNetTrainingBatch2.DataBase.App2DbContextModels;
-using WZHMiniPos.App2DbContextModels;
+using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
 
-namespace WZHDotNetTrainingBatch2.MiniPos
+namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
 {
     public class SaleDetailService
     {
@@ -16,11 +15,11 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             var lst = db.TblSaleDetails.ToList();
             foreach (var item in lst)
             {
-                Console.WriteLine( item.SaleDetailId);
+                Console.WriteLine(item.SaleDetailId);
                 Console.WriteLine(item.SaleId);
                 Console.WriteLine(item.ProductId);
                 Console.WriteLine(item.Price);
-                Console.WriteLine( item.Quantity);
+                Console.WriteLine(item.Quantity);
 
             }
         }
@@ -33,21 +32,21 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             App2DbContext db = new App2DbContext();
             var item = db.TblSaleDetails.FirstOrDefault(x => x.SaleId == id);
             if (item is null) return;
-            Console.WriteLine("Sale Id => "+ item.SaleId);
-            Console.WriteLine( item.ProductId);
+            Console.WriteLine("Sale Id => " + item.SaleId);
+            Console.WriteLine(item.ProductId);
             Console.WriteLine(item.Price);
-            Console.WriteLine( item.Quantity);
+            Console.WriteLine(item.Quantity);
         }
         public void Create()
         {
             Console.Write("Enter SaleId.");
-            int saleid =int.Parse( Console.ReadLine()!);
+            int saleid = int.Parse(Console.ReadLine()!);
 
             Console.Write("Enter ProductId..");
-           int  productId = int.Parse(Console.ReadLine()!);
+            int productId = int.Parse(Console.ReadLine()!);
             Console.Write("Enter Price..");
             decimal price = decimal.Parse(Console.ReadLine()!);
-            Console.Write(  "Enter Quantity..");
+            Console.Write("Enter Quantity..");
             int quantity = int.Parse(Console.ReadLine()!);
 
             TblSaleDetail saleDetail = new TblSaleDetail();
@@ -56,7 +55,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             saleDetail.Price = price;
             saleDetail.Quantity = quantity;
 
-            App2DbContext db =new App2DbContext();
+            App2DbContext db = new App2DbContext();
             db.TblSaleDetails.Add(saleDetail);
             var result = db.SaveChanges();
             Console.WriteLine(result > 0 ? "insert successful" : "insert failed");
@@ -83,7 +82,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             EnumSaleDetail menu = (EnumSaleDetail)no;
             switch (menu)
             {
-           
+
                 case EnumSaleDetail.SaleRecord:
                     Console.WriteLine("This is Sale Record");
                     Read();
@@ -98,8 +97,8 @@ namespace WZHDotNetTrainingBatch2.MiniPos
                     break;
                 case EnumSaleDetail.Exit:
                     goto End;
-            case EnumSaleDetail.None:
-            default:
+                case EnumSaleDetail.None:
+                default:
                     break;
             }
         End:
@@ -115,5 +114,5 @@ namespace WZHDotNetTrainingBatch2.MiniPos
         NewSale,
         Exit
     }
-
 }
+
