@@ -29,7 +29,9 @@ switch (menu )
         productServie.Execute();
         goto Menu;
     case EnumMenu.Sale:
-        break;
+        SaleService saleService = new SaleService();
+        saleService.Execute();
+        goto Menu;
     case EnumMenu.SaleDetail:
         break;
     case EnumMenu.Exit:

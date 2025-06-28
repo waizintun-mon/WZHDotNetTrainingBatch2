@@ -32,7 +32,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos
             App2DbContext db = new App2DbContext();
             var item = db.TblSaleDetails.FirstOrDefault(x => x.SaleId == id);
             if (item is null) return;
-            Console.WriteLine( item.SaleId);
+            Console.WriteLine("Sale Id => "+ item.SaleId);
             Console.WriteLine( item.ProductId);
             Console.WriteLine(item.Price);
             Console.WriteLine( item.Quantity);
