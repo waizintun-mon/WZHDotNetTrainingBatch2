@@ -12,4 +12,6 @@ public partial class TblSaleSummary
     public DateTime SaleDate { get; set; }
 
     public decimal Total { get; set; }
+
+    public bool DeleteFlag { get; set; }
 }
