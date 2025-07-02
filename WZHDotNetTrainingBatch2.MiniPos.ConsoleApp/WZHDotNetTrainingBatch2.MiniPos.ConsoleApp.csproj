@@ -7,6 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="SaleDetailService.cs" />
+    <Compile Remove="SaleService.cs" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
@@ -21,6 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\WZHDotNetTrainingBatch2.Domain\WZHDotNetTrainingBatch2.MiniPos.Domain.csproj" />
 	  <ProjectReference Include="..\WZHDotNetTrainingBatch2.MiniPos.DataBase\WZHDotNetTrainingBatch2.MiniPos.DataBase.csproj" />
 	</ItemGroup>
 </Project>

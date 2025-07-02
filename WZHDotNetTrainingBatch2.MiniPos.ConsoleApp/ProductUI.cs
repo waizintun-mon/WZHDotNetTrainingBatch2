@@ -4,20 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
+using WZHDotNetTrainingBatch2.MiniPos.Domain.Features;
 
 namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
 {
-    public class ProductService
+    public class ProductUI
     {
         public void Read()
         {
-            App2DbContext db = new App2DbContext();
-            var lst = db.TblProducts.Where(x => x.DeleteFlag == false).ToList();
+            ProductService productiveService = new ProductService();
+            var lst = productiveService.GetProduct();
             foreach (var item in lst)
             {
-                Console.WriteLine(item.ProductId);
-                Console.WriteLine(item.ProductName);
-                Console.WriteLine(item.Price);
+                Console.WriteLine("Product id =>" + item.ProductId);
+                Console.WriteLine("Product name =>" + item.ProductName);
+                Console.WriteLine("Price =>" + item.Price);
             }
 
         }
@@ -27,51 +28,64 @@ namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
             string input = Console.ReadLine()!;
             bool isInt = int.TryParse(input, out int id);
 
-            App2DbContext db = new App2DbContext();
-            var item = db.TblProducts.
-                 Where(x => x.DeleteFlag == false).FirstOrDefault(x => x.ProductId == id);
+            ProductService productService = new ProductService();
+            var item = productService.FindProductId(id);
             if (item is null) return;
-            Console.WriteLine(item.ProductName);
-            Console.WriteLine(item.Price);
+
+            Console.WriteLine("Product id =>" + item.ProductName);
+            Console.WriteLine("Price =>" + item.Price);
 
         }
         public void Create()
         {
             Console.Write("Enter Product Name...");
             string name = Console.ReadLine()!;
+        PriceInput:
             Console.Write("Enter Price..");
-            decimal price = decimal.Parse(Console.ReadLine()!);
-
-
-            TblProduct product = new TblProduct();
-            product.ProductName = name;
-            product.Price = price;
-
-            App2DbContext db = new App2DbContext();
-            db.TblProducts.Add(product);
-            var result = db.SaveChanges();
+            var input = Console.ReadLine()!;
+            bool isDecimal = decimal.TryParse(input, out decimal price);
+            if(!isDecimal) 
+            {
+                goto PriceInput;
+            }
+            ProductService productService = new ProductService();
+            int result = productService.CreateNewProduct(name, price);
+            
             Console.WriteLine(result > 0 ? "insert successful" : "insert failed");
         }
         public void Update()
         {
+        ProductIdInput:
             Console.Write("Enter Id...");
             string input = Console.ReadLine()!;
             bool isInt = int.TryParse(input, out int id);
+            if (!isInt)
+            {
+                goto ProductIdInput;
+            }
+            ProductService productService= new ProductService();
+           var item = productService.FindProductId(id);
+            if(item is null)
+            {
+                Console.WriteLine("No data found");
+                goto ProductIdInput;
+            }
+            Console.WriteLine("Product id =>" + item.ProductName);
+            Console.WriteLine("Price =>" + item.Price);
 
             Console.Write("Update Product Name..");
             string name = Console.ReadLine()!;
-            Console.Write("Update Price..");
-            decimal price = decimal.Parse(Console.ReadLine()!);
 
+        PriceInput:
+            Console.Write("Enter Price..");
+           string priceInput = Console.ReadLine()!;
+            bool isDecimal = decimal.TryParse(priceInput, out decimal price);
+            if (!isDecimal)
+            {
+                goto PriceInput;
+            }
 
-            bool isExit = FindId(id);
-            if (!isExit) return;
-
-            App2DbContext db = new App2DbContext();
-            var item = db.TblProducts.Where(x => x.DeleteFlag == false).FirstOrDefault(x => x.ProductId == id);
-            item.ProductName = name;
-            item.Price = price;
-            var result = db.SaveChanges();
+           var result = productService.UpdateProduct(id, name, price);
             Console.WriteLine(result > 0 ? "update successful" : "update failed");
         }
         public void Delete()
@@ -79,13 +93,11 @@ namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
             Console.Write("Enter Id...");
             string input = Console.ReadLine()!;
             bool isInt = int.TryParse(input, out int id);
-
-            bool isExit = FindId(id);
-            if (!isExit) return;
-            App2DbContext db = new App2DbContext();
-            var item = db.TblProducts.FirstOrDefault(x => x.ProductId == id);
-            item.DeleteFlag = true;
-            var result = db.SaveChanges();
+            
+            ProductService productService = new ProductService();
+            productService.FindProductId(id);
+                
+         var result = productService.DeleteProduct(id);
             Console.WriteLine(result > 0 ? "delete successful" : "delete failed");
         }
         private bool FindId(int id)
@@ -146,7 +158,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
             goto Menu;
 
         End:
-            Console.WriteLine("Exiting from app");
+            Console.WriteLine("Exiting from product menu");
         }
 
 

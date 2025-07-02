@@ -21,6 +21,8 @@ public partial class App2DbContext : DbContext
 
     public virtual DbSet<TblSaleSummary> TblSaleSummaries { get; set; }
 
+    public virtual DbSet<TblStaff> TblStaffs { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.;Database=DotNetTrainingBatch2MiniPos;User ID=sa;Password=sa@@123;TrustServerCertificate=True;");
@@ -60,6 +62,24 @@ public partial class App2DbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("VoucherNO");
+        });
+
+        modelBuilder.Entity<TblStaff>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("TBl_Staff");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("email");
+            entity.Property(e => e.Name)
+                .HasMaxLength(10)
+                .IsFixedLength();
+            entity.Property(e => e.Position)
+                .HasMaxLength(10)
+                .IsFixedLength();
         });
 
         OnModelCreatingPartial(modelBuilder);
