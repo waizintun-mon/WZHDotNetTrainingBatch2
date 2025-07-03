@@ -7,7 +7,7 @@ using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
 
 namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
 {
-    internal class StaffRegisteration
+    public class StaffService
     {
         public TblStaff?  FindStaff(int code)
         {

@@ -141,6 +141,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
                 case EnumProductMenu.EditProduct:
                     Console.WriteLine("This Menu is EditProduct");
                     Edit();
+                    Update();
                     break;
                 case EnumProductMenu.DeleteProduct:
                     Console.WriteLine("This Menu is DeleteProduct");
