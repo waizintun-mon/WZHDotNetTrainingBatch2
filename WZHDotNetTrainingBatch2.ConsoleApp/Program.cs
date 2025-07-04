@@ -20,12 +20,17 @@ Console.WriteLine("Hello, World!");
 //    Console.WriteLine("Blogauthor =>" + item.BlogAuthor);
 //    Console.WriteLine("Blogcontext => " + item.BlogContext);
 //}
-AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
-adoDotNetExample.Read();
+//AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
+//adoDotNetExample.Read();
 //adoDotNetExample.Edit();
 //adoDotNetExample.Create();
 //adoDotNetExample.Update();
 //adoDotNetExample.Delete();
-
+DapperExample dapperExample = new DapperExample();
+//dapperExample.Read();
+//dapperExample.Edit();
+//dapperExample.Create();
+//dapperExample.Update();
+dapperExample.Delete();
 
 Console.ReadLine();
