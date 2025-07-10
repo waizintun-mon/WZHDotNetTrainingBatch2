@@ -1,3 +1,5 @@
+using WZHDotNetTrainingBatch2.WinFormsApp1;
+
 namespace WZHDotNetTrainingBatch2WinFormsApp1
 {
     internal static class Program
@@ -12,7 +14,7 @@ namespace WZHDotNetTrainingBatch2WinFormsApp1
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             // Application.Run(new FrmStaff());
-            Application.Run(new WZHDotNetTrainingBatch2.WinFormsApp1.FrmProduct());
+            Application.Run(new FrmProduct());
         }
     }
 }
