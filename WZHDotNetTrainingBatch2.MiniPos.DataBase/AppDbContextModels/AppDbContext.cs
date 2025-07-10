@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
+namespace WZHDotNetTrainingBatch2.MiniPos.DataBase.AppDbContextModels;
 
-public partial class App2DbContext : DbContext
+public partial class AppDbContext : DbContext
 {
-    public App2DbContext()
+    public AppDbContext()
     {
     }
 
-    public App2DbContext(DbContextOptions<App2DbContext> options)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
     }
@@ -66,20 +66,20 @@ public partial class App2DbContext : DbContext
 
         modelBuilder.Entity<TblStaff>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("TBl_Staff");
+            entity.HasKey(e => e.StaffId);
 
-            entity.Property(e => e.Email)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("email");
-            entity.Property(e => e.Name)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.ToTable("Tbl_Staff");
+
+            entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.MobileNo).HasColumnName("Mobile No");
             entity.Property(e => e.Position)
-                .HasMaxLength(10)
-                .IsFixedLength();
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.StaffCode).HasMaxLength(20);
+            entity.Property(e => e.StaffName)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Staff Name");
         });
 
         OnModelCreatingPartial(modelBuilder);

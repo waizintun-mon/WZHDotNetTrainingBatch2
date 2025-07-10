@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
+
+using WZHDotNetTrainingBatch2.MiniPos.DataBase.AppDbContextModels;
 
 namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
 {
@@ -12,13 +13,13 @@ namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
         public List<TblProduct> GetProduct()
         {
 
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var lst = db.TblProducts.Where(x => x.DeleteFlag == false).ToList();
             return lst;
         }
         public TblProduct FindProductId(int id)
         {
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var item = db.TblProducts.
                  Where(x => x.DeleteFlag == false).FirstOrDefault(x => x.ProductId == id);
             return item;
@@ -29,14 +30,14 @@ namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
             product.ProductName = name;
             product.Price = price;
 
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             db.TblProducts.Add(product);
             var result = db.SaveChanges();
             return result;
         }
         public int UpdateProduct(int id, string name, decimal price)
         {
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var item = db.TblProducts.Where(x => x.DeleteFlag == false).FirstOrDefault(x => x.ProductId == id);
             item.ProductName = name;
             item.Price = price;
@@ -45,7 +46,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
         }
         public int DeleteProduct(int id)
         {
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var item = db.TblProducts.FirstOrDefault(x => x.ProductId == id);
             item.DeleteFlag = true;
             var result = db.SaveChanges();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
+using WZHDotNetTrainingBatch2.MiniPos.DataBase.AppDbContextModels;
 using WZHDotNetTrainingBatch2.MiniPos.Domain.Features;
 
 namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp

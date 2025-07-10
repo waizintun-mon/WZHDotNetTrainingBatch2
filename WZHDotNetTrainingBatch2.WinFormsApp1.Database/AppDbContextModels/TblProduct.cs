@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
+namespace WZHDotNetTrainingBatch2.WinFormsApp1.Database.AppDbContextModels;
 
 public partial class TblProduct
 {

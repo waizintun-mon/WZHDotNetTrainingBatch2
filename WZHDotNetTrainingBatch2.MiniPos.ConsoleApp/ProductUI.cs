@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
+using WZHDotNetTrainingBatch2.MiniPos.DataBase.AppDbContextModels;
 using WZHDotNetTrainingBatch2.MiniPos.Domain.Features;
 
 namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
@@ -102,7 +102,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos.ConsoleApp
         }
         private bool FindId(int id)
         {
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var item = db.TblProducts.FirstOrDefault(x => x.ProductId == id);
             return item != null;
         }

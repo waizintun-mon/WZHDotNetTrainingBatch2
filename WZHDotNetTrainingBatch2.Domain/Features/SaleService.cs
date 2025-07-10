@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WZHDotNetTrainingBatch2.MiniPos.DataBase.App2DbContextModels;
+using WZHDotNetTrainingBatch2.MiniPos.DataBase.AppDbContextModels;
 
 namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
 {
@@ -11,13 +11,13 @@ namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
     {
         public TblProduct FindProductId(int id)
         {
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var item = db.TblProducts.FirstOrDefault(x => x.ProductId == id);
             return item;
         }
         public int Sale(List<TblSaleDetail> products)
         {
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             #region Generate SaleSummary Id and Create Sale Summary
             TblSaleSummary sale = new TblSaleSummary();
             sale.SaleDate = DateTime.Now;
@@ -42,7 +42,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
         }
         public List <TblSaleSummary> GetSale()
         {
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var lst = db.TblSaleSummaries.
                Where(x =>x.DeleteFlag==false). ToList();
             return lst;
@@ -50,7 +50,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
         public TblSaleSummary GetSaleId(int id)
         {
 
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var item = db.TblSaleSummaries.FirstOrDefault(x => x.SaleId == id);
             return item;
         }
@@ -58,7 +58,7 @@ namespace WZHDotNetTrainingBatch2.MiniPos.Domain.Features
         public List<TblSaleDetail> GetSaleDetail()
         {
 
-            App2DbContext db = new App2DbContext();
+            AppDbContext db = new AppDbContext();
             var lst = db.TblSaleDetails.ToList();
             return lst;
         }
